@@ -22,6 +22,7 @@ public class BulletMovement : MonoBehaviour
         if (other.CompareTag("Placa"))
         {
             other.GetComponent<Placa>().Impactado();
+            Destroy(gameObject); // Destruye la bala al impactar con la placa
         }
     }
 }

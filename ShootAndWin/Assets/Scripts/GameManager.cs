@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public TextMeshProUGUI scoreText;
     private int score = 0;
 
     void Awake()
@@ -17,5 +19,11 @@ public class GameManager : MonoBehaviour
     {
         score += value;
         Debug.Log("Score: " + score);
+        UpdateScoreText();
+    }
+    
+    void UpdateScoreText()
+    {
+        scoreText.text = score.ToString();
     }
 }
