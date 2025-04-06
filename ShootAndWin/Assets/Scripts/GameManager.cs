@@ -129,6 +129,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0; // Pausa el juego
         gameOverState = false; // Cambia el estado de Game Over
 
+        GameObject[] Placas = GameObject.FindGameObjectsWithTag("Placa");   // Buscar todas las bolas mágicas y destruirlas
+        foreach (GameObject Placa in Placas)
+        {
+            Placa.gameObject.SetActive(true); // Activa las placas
+        }
+
         GameObject[] bullets = GameObject.FindGameObjectsWithTag("bullet");   // Buscar todas las bolas mágicas y destruirlas
         foreach (GameObject bullet in bullets)
         {
