@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     private int score = 0;
     public TextMeshProUGUI countdownText; // 3, 2, 1, GO!
+    public GameObject coutdownBackground; // Fondo del countdown
     private bool juegoActivo = false;
     public static bool gameOverState = false;
     public GameObject bulletPrefab;
@@ -82,7 +83,8 @@ public class GameManager : MonoBehaviour
         juegoActivo = false;
         Time.timeScale = 0f;
 
-        countdownText.gameObject.SetActive(true);
+        countdownText.gameObject.SetActive(true);   // Muestra el texto del countdown
+        coutdownBackground.SetActive(true);
 
         countdownText.text = "3";
         yield return new WaitForSecondsRealtime(1f);
@@ -93,7 +95,8 @@ public class GameManager : MonoBehaviour
         countdownText.text = "GO!";
         yield return new WaitForSecondsRealtime(0.5f);
 
-        countdownText.gameObject.SetActive(false);
+        countdownText.gameObject.SetActive(false);  // Oculta el texto del countdown
+        coutdownBackground.SetActive(false);
 
         Time.timeScale = 1f;
         juegoActivo = true;
