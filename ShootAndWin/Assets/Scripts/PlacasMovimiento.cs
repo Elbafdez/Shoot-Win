@@ -12,6 +12,8 @@ public class PlacasFacilesMovimiento : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.Instance.EstaJugando()) return;    // Verifica si el juego está activo
+
         transform.Translate(Vector2.right * speed * direccion * Time.deltaTime);
 
         if (transform.position.x > limiteDerecha)
