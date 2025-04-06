@@ -26,10 +26,22 @@ public class GameManager : MonoBehaviour
     private Vector3 inicioPD;
     private Vector3 inicioP;
 
+    //---------------------------- META PUNTUACION -----------------------------------------
+    private int highScore = 0;
+    public TextMeshProUGUI highScoreText;
+
     void Awake()
     {
+        // Establecer la tasa de fotogramas objetivo a 60
+        Application.targetFrameRate = 60;
+
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        // Cargar el puntaje más alto desde PlayerPrefs
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+
         inicioPF = placasFaciles.transform.position;
         inicioPD = placasDificiles.transform.position;
         inicioP = player.transform.position;
@@ -53,7 +65,7 @@ public class GameManager : MonoBehaviour
             GameOver();
 
             // Restart
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 Restart();
             }
@@ -62,9 +74,11 @@ public class GameManager : MonoBehaviour
         MostrarTiempo(tiempoRestante);
     }
 
+//---------------------------- RESTART -----------------------------------------
     public void Restart()   // Reinicia el juego
     {
         Time.timeScale = 1; // Reanuda el juego
+        highScoreText.gameObject.SetActive(false); // Oculta el texto del puntaje más alto
         tiempoRestante = 60f; // Reinicia el tiempo
         score = 0; // Reinicia el puntaje
         UpdateScoreText(); // Actualiza el texto del puntaje
@@ -123,23 +137,32 @@ public class GameManager : MonoBehaviour
         timeText.text = string.Format("{0:00}:{1:00}", minutos, segundos);
     }
 
+    //---------------------------- GAME OVER -----------------------------------------
     void GameOver()
     {
         Debug.Log("¡Game Over!");
-        Time.timeScale = 0; // Pausa el juego
         gameOverState = false; // Cambia el estado de Game Over
 
-        GameObject[] Placas = GameObject.FindGameObjectsWithTag("Placa");   // Buscar todas las bolas mágicas y destruirlas
-        foreach (GameObject Placa in Placas)
+        highScoreText.gameObject.SetActive(true); // Muestra el texto del puntaje más alto
+        coutdownBackground.SetActive(true);
+        // Comparar si el puntaje actual es mayor que el puntaje más alto
+        if (score > highScore)
         {
-            Placa.gameObject.SetActive(true); // Activa las placas
+            highScore = score;
+            // Guardar el nuevo puntaje más alto en PlayerPrefs
+            highScoreText.text = string.Format("Top score: " + highScore);
         }
 
-        GameObject[] bullets = GameObject.FindGameObjectsWithTag("bullet");   // Buscar todas las bolas mágicas y destruirlas
+        // Mostrar el puntaje más alto en el Game Over
+        Debug.Log("Puntaje más alto: " + highScore);
+
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("bullet");   // Buscar todas las balas y destruirlas
         foreach (GameObject bullet in bullets)
         {
             Destroy(bullet);
         }
+
+        Time.timeScale = 0; // Pausa el juego
     }
     public bool EstaJugando()
     {
