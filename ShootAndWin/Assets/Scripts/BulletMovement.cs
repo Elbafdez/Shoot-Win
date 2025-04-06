@@ -9,6 +9,12 @@ public class BulletMovement : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.gameOverState) // Si el juego ha terminado, destruimos la bala
+        {
+            Destroy(gameObject); // Destruye la bala
+            return; // Terminamos la ejecución de Update para evitar más operaciones
+        }
+
         transform.Translate(Vector2.up * speed * Time.deltaTime);
 
         if(transform.position.y > 8f) // Limite superior de la pantalla

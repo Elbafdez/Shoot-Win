@@ -2275,7 +2275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 543733653}
   countdownText: {fileID: 252378278}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 1714630303071363567, guid: f85524713b5f29c46a723490d2398a42, type: 3}
   tiempoRestante: 60
   timeText: {fileID: 498151126}
   placasFaciles: {fileID: 659208413}

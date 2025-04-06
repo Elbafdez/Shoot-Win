@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     public TextMeshProUGUI countdownText; // 3, 2, 1, GO!
     private bool juegoActivo = false;
+    public static bool gameOverState = false;
     public GameObject bulletPrefab;
 
     //---------------------------- COUNTDOWN -----------------------------------------
@@ -123,7 +124,13 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("¡Game Over!");
         Time.timeScale = 0; // Pausa el juego
-        Destroy(bulletPrefab); // Destruye el prefab de la bala
+        gameOverState = false; // Cambia el estado de Game Over
+
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("bullet");   // Buscar todas las bolas mágicas y destruirlas
+        foreach (GameObject bullet in bullets)
+        {
+            Destroy(bullet);
+        }
     }
     public bool EstaJugando()
     {
