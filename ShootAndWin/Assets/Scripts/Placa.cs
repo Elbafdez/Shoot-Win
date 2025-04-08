@@ -10,6 +10,10 @@ public class Placa : MonoBehaviour
     private SpriteRenderer sr;
     private Collider2D col;
 
+    //----------------------------- SONIDO -----------------------------------------
+    public AudioSource audioSource; // Referencia al AudioSource
+    public AudioClip[] clipsDeImpacto; // Tus clips de sonido de disparo
+
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -19,6 +23,13 @@ public class Placa : MonoBehaviour
     public void Impactado()
     {
         GameManager.Instance.AddPoints(puntos);
+        // Reproducir sonido
+        if (clipsDeImpacto.Length > 0 && audioSource != null)
+        {
+            int index = Random.Range(0, clipsDeImpacto.Length);
+            audioSource.PlayOneShot(clipsDeImpacto[index]);
+        }
+
         StartCoroutine(Reaparecer());
     }
 

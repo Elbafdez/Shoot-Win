@@ -13,6 +13,10 @@ public class Player : MonoBehaviour
     public float limiteIzquierda = -8f;
     public float limiteDerecha = 8f;
 
+    //----------------------------- SONIDO -----------------------------------------
+    public AudioSource audioSource; // Referencia al AudioSource
+    public AudioClip[] clipsDeDisparo; // Tus clips de sonido de disparo
+
     void Update()
     {
         if (!GameManager.Instance.EstaJugando()) return;    // Verifica si el juego está activo
@@ -35,6 +39,13 @@ public class Player : MonoBehaviour
     void Disparar()
     {
         Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        // Reproducir sonido de disparo
+        if (clipsDeDisparo.Length > 0 && audioSource != null)
+        {
+            int index = Random.Range(0, clipsDeDisparo.Length);
+            audioSource.PlayOneShot(clipsDeDisparo[index]);
+        }
+
         puedeDisparar = false;
         StartCoroutine(ReiniciarDisparo());
     }
