@@ -43,4 +43,10 @@ public class Placa : MonoBehaviour
         sr.enabled = true;
         col.enabled = true;
     }
+
+    public void Reactivar()
+    {
+        sr.enabled = true;
+        col.enabled = true;
+    }
 }

@@ -94,6 +94,12 @@ public class GameManager : MonoBehaviour
 
         juegoActivo = false; // Evita que Update avance
         StartCoroutine(ContarRegresivaInicio());
+        //-------------------------------------------------------------------
+        Placa[] todasLasPlacas = FindObjectsOfType<Placa>();
+        foreach (Placa placa in todasLasPlacas)
+        {
+            placa.Reactivar();
+        }
     }
 
     
