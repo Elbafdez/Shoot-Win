@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private bool juegoActivo = false;
     public static bool gameOverState = false;
     public GameObject bulletPrefab;
+    public MusicManager musicManager; // Referencia al script MusicManager
 
     //---------------------------- COUNTDOWN -----------------------------------------
     public float tiempoRestante = 60f;
@@ -78,6 +79,10 @@ public class GameManager : MonoBehaviour
     public void Restart()   // Reinicia el juego
     {
         Time.timeScale = 1; // Reanuda el juego
+        if (musicManager != null)
+        {
+            musicManager.RestartMusic();
+        }
         highScoreText.gameObject.SetActive(false); // Oculta el texto del puntaje más alto
         tiempoRestante = 60f; // Reinicia el tiempo
         score = 0; // Reinicia el puntaje
@@ -142,6 +147,11 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("¡Game Over!");
         gameOverState = false; // Cambia el estado de Game Over
+
+        if (musicManager != null)
+        {
+            musicManager.StopMusic();
+        }
 
         highScoreText.gameObject.SetActive(true); // Muestra el texto del puntaje más alto
         coutdownBackground.SetActive(true);
