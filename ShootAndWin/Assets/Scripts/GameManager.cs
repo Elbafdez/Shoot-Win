@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
     {
         // COUNTDOWN
         if (!juegoActivo) return; // Si el juego no está activo, no actualizamos el tiempo
+
+        if(Input.GetKeyDown(KeyCode.Escape)) // Si se presiona la tecla Escape
+        {
+            Application.Quit(); // Salir del juego
+        }
         
         tiempoRestante -= Time.deltaTime; // Resta el tiempo transcurrido desde el último frame
 
