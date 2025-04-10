@@ -530,8 +530,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278192318
+  m_fontColor: {r: 0.745283, g: 0.031436026, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4107,8 +4107,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278192575
+  m_fontColor: {r: 0.7490196, g: 0.03529412, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5121,6 +5121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2c6a2162f76014e85d6cdeb3ab501e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptPlayer: {fileID: 0}
   scoreText: {fileID: 543733653}
   countdownText: {fileID: 252378278}
   coutdownBackground: {fileID: 2091269039}
@@ -5132,6 +5133,8 @@ MonoBehaviour:
   placasDificiles: {fileID: 524719057}
   player: {fileID: 2054495867}
   highScoreText: {fileID: 499692894}
+  yourScoreText: {fileID: 826920585}
+  strayBullets: {fileID: 320636582}
 --- !u!4 &1587742148
 Transform:
   m_ObjectHideFlags: 0
@@ -5215,6 +5218,7 @@ MonoBehaviour:
   tiempoEntreDisparos: 0.5
   limiteIzquierda: -8
   limiteDerecha: 8
+  balasDisparadas: 0
   audioSource: {fileID: 2054495868}
   clipsDeDisparo:
   - {fileID: 8300000, guid: 44469385e11b283428c1d249385a1139, type: 3}

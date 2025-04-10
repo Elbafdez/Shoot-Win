@@ -9,9 +9,9 @@ public class Player : MonoBehaviour
     public Transform firePoint;
     public float tiempoEntreDisparos = 1f;
     private bool puedeDisparar = true;
-
     public float limiteIzquierda = -8f;
     public float limiteDerecha = 8f;
+    public int balasDisparadas = 0; // Contador de balas disparadas
 
     //----------------------------- SONIDO -----------------------------------------
     public AudioSource audioSource; // Referencia al AudioSource
@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     void Disparar()
     {
         Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        balasDisparadas++;
         // Reproducir sonido de disparo
         if (clipsDeDisparo.Length > 0 && audioSource != null)
         {

@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public Player scriptPlayer;
     public TextMeshProUGUI scoreText;
     private int score = 0;
     public TextMeshProUGUI countdownText; // 3, 2, 1, GO!
@@ -30,6 +32,8 @@ public class GameManager : MonoBehaviour
     //---------------------------- META PUNTUACION -----------------------------------------
     private int highScore = 0;
     public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI yourScoreText;
+    public TextMeshProUGUI strayBullets;
 
     void Awake()
     {
@@ -173,6 +177,9 @@ public class GameManager : MonoBehaviour
             // Guardar el nuevo puntaje más alto en PlayerPrefs
             highScoreText.text = string.Format("Top score: " + highScore);
         }
+
+        yourScoreText.text = string.Format("your score: " + score);
+        strayBullets.text = string.Format("stray bullets: " + scriptPlayer.balasDisparadas);
 
         // Mostrar el puntaje más alto en el Game Over
         Debug.Log("Puntaje más alto: " + highScore);
