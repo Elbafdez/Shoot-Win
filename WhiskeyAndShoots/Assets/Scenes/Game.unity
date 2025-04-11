@@ -2835,7 +2835,7 @@ GameObject:
   - component: {fileID: 749416061}
   - component: {fileID: 749416060}
   m_Layer: 5
-  m_Name: 'TotalBales '
+  m_Name: TotalBullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5121,7 +5121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2c6a2162f76014e85d6cdeb3ab501e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scriptPlayer: {fileID: 0}
   scoreText: {fileID: 543733653}
   countdownText: {fileID: 252378278}
   coutdownBackground: {fileID: 2091269039}
@@ -5134,7 +5133,8 @@ MonoBehaviour:
   player: {fileID: 2054495867}
   highScoreText: {fileID: 499692894}
   yourScoreText: {fileID: 826920585}
-  strayBullets: {fileID: 320636582}
+  totalBullets: {fileID: 749416060}
+  stayBullets: {fileID: 320636582}
 --- !u!4 &1587742148
 Transform:
   m_ObjectHideFlags: 0
@@ -5195,7 +5195,7 @@ GameObject:
   - component: {fileID: 2054495868}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5218,7 +5218,7 @@ MonoBehaviour:
   tiempoEntreDisparos: 0.5
   limiteIzquierda: -8
   limiteDerecha: 8
-  balasDisparadas: 0
+  firedBullets: 0
   audioSource: {fileID: 2054495868}
   clipsDeDisparo:
   - {fileID: 8300000, guid: 44469385e11b283428c1d249385a1139, type: 3}
