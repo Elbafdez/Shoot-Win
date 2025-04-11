@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private bool puedeDisparar = true;
     public float limiteIzquierda = -8f;
     public float limiteDerecha = 8f;
-    public int balasDisparadas = 0; // Contador de balas disparadas
+    public int firedBullets = 0; // Contador de balas disparadas
 
     //----------------------------- SONIDO -----------------------------------------
     public AudioSource audioSource; // Referencia al AudioSource
@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     void Disparar()
     {
         Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        balasDisparadas++;
+        firedBullets++;
         // Reproducir sonido de disparo
         if (clipsDeDisparo.Length > 0 && audioSource != null)
         {

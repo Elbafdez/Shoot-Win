@@ -21,7 +21,8 @@ public class Placa : MonoBehaviour
     public void Impactado()
     {
         GameManager.Instance.AddPoints(puntos);
-        // Reproducir sonido
+
+        //----------------------- SONIDO ------------------------------
         if (clipsDeImpacto.Length > 0 && audioSource != null)
         {
             int index = Random.Range(0, clipsDeImpacto.Length);

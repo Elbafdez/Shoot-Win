@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public Player scriptPlayer;
+    private Player scriptPlayer;
     public TextMeshProUGUI scoreText;
     private int score = 0;
     public TextMeshProUGUI countdownText; // 3, 2, 1, GO!
@@ -33,7 +33,9 @@ public class GameManager : MonoBehaviour
     private int highScore = 0;
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI yourScoreText;
-    public TextMeshProUGUI strayBullets;
+    public TextMeshProUGUI totalBullets;
+    public TextMeshProUGUI stayBullets;
+    private int impactedBullets = 0;
 
     void Awake()
     {
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        scriptPlayer = FindObjectOfType<Player>();
         StartCoroutine(ContarRegresivaInicio());
     }
 
@@ -95,6 +98,8 @@ public class GameManager : MonoBehaviour
         highScoreText.gameObject.SetActive(false); // Oculta el texto del puntaje más alto
         tiempoRestante = 60f; // Reinicia el tiempo
         score = 0; // Reinicia el puntaje
+        impactedBullets = 0; // Reinicia el contador de balas impactadas
+        scriptPlayer.firedBullets = 0; // Reinicia el contador de balas disparadas
         UpdateScoreText(); // Actualiza el texto del puntaje
 
         placasFaciles.transform.position = inicioPF; // Reinicia la posición de las placas fáciles
@@ -103,7 +108,7 @@ public class GameManager : MonoBehaviour
 
         juegoActivo = false; // Evita que Update avance
         StartCoroutine(ContarRegresivaInicio());
-        //-------------------------------------------------------------------
+        
         Placa[] todasLasPlacas = FindObjectsOfType<Placa>();
         foreach (Placa placa in todasLasPlacas)
         {
@@ -111,7 +116,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    
+    //---------------------------- COUNTDOWN -----------------------------------------
     IEnumerator ContarRegresivaInicio()
     {
         juegoActivo = false;
@@ -139,6 +144,8 @@ public class GameManager : MonoBehaviour
     //---------------------------- PUNTUACION -----------------------------------------
     public void AddPoints(int value)
     {
+        impactedBullets++; // Incrementa el contador de balas impactadas
+        Debug.Log("Balas impactadas: " + impactedBullets); // Muestra el número de balas impactadas en la consola
         score += value;
         Debug.Log("Score: " + score);
         UpdateScoreText();
@@ -162,24 +169,29 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("¡Game Over!");
         gameOverState = false; // Cambia el estado de Game Over
+        coutdownBackground.SetActive(true);
 
+        //----------- MUSICA -----------------
         if (musicManager != null)
         {
             musicManager.StopMusic();
         }
 
+        //------------ TEXT ------------------
         highScoreText.gameObject.SetActive(true); // Muestra el texto del puntaje más alto
-        coutdownBackground.SetActive(true);
+
         // Comparar si el puntaje actual es mayor que el puntaje más alto
         if (score > highScore)
         {
             highScore = score;
-            // Guardar el nuevo puntaje más alto en PlayerPrefs
             highScoreText.text = string.Format("Top score: " + highScore);
         }
 
-        yourScoreText.text = string.Format("your score: " + score);
-        strayBullets.text = string.Format("stray bullets: " + scriptPlayer.balasDisparadas);
+        int strayBullets = scriptPlayer.firedBullets - impactedBullets; // Calcula las balas que quedan
+
+        yourScoreText.text = string.Format("your score: " + score); // Muestra el puntaje actual
+        totalBullets.text = string.Format("total bullets: " + scriptPlayer.firedBullets);   // Muestra el total de balas disparadas
+        stayBullets.text = string.Format("stay bullets: " + strayBullets);   // Muestra el total de balas disparadas
 
         // Mostrar el puntaje más alto en el Game Over
         Debug.Log("Puntaje más alto: " + highScore);
